@@ -65,14 +65,11 @@ def read_arguments():
 	# Required parameters
 	parser.add_argument("--log_name", default=None, type=str, required=True)
 
-	parser.add_argument("--output_dir", default="../model", type=str, required=False,
+	parser.add_argument("--output_dir", default="./model", type=str, required=False,
 						help="The output directory where the model predictions and checkpoints will be written.")
 
 	parser.add_argument("--data_dir", default="../dataset", type=str,
 						help="Path to the dir which contains processed data for some languages")
-
-	parser.add_argument("--lang", default=None, type=str, required=False,
-						help="language to summarize")
 
 	parser.add_argument("--no_cuda", default=False, action='store_true',
 						help="Avoid using CUDA when available")
