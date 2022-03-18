@@ -31,7 +31,7 @@ class Example(object):
 def read_examples(filename, args):
     """Read examples from filename."""
     if args.add_task_prefix:
-        task_prefix = f"Translate C\# to java: "
+        task_prefix = f"Translate "
     else:
         task_prefix = ""
 
@@ -55,7 +55,7 @@ def read_examples(filename, args):
             examples.append(
                 Example(
                     idx=idx,
-                    source=task_prefix + cs,
+                    source=task_prefix + cs + 'to Java',
                     target=language_prefix + java,
                 )
             )
