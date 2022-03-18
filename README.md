@@ -50,3 +50,70 @@ cd translation/data
 python preprocess.py
 ```
 The runnning command is similar with code summarization for fine-tune and prompt tuning.
+
+
+# Full Results
+## defect detection
+| Template            | Verbalizer                                                                 | ACC   |
+|---------------------|----------------------------------------------------------------------------|-------|
+| [x] the code is [Z] | bad, defective&clean, perfect     | 63.68 |
+| the code [x] is [z] | bad, defective&clean, perfect                                             | 64.17 |
+| [x] it is [z]       | bad, defective&clean, perfect                                             | 63.98 |
+| a [z] code [x]      | bad, defective&clean, perfect                                             | 63.36 |
+| the code [x] is [z] | yes&no                                                                    | 63.08 |
+| the code [x] is [z] | bad, defective&indefective, perfect                                       | 64.28 |
+| the code [x] is [z] | bad&perfect                                                               | 63.71 |
+| the code [x] is [z] | bad, defective, insecure&clean, perfect, secure                           | 63.26 |
+| the code [x] is [z] | bad, defective, insecure, vulnerable&clean, perfect, secure,invulnerable | 63.10  |
+| [SOFT] [z] [SOFT] [x]      | bad, defective&clean, perfect                                             | 62.95 |
+| [x] [SOFT]*2 [z]      | bad, defective&clean, perfect                                             | 62.77 |
+| [x] [SOFT]*3 [z]      | bad, defective&clean, perfect                                             | 63.15 |
+| [SOFT]*10 [x] [z]      | bad, defective&clean, perfect                                             | 62.52 |
+| [SOFT]*50 [x] [z]      | bad, defective&clean, perfect                                             | 62.96 |
+| [SOFT]*100 [x] [z]      | bad, defective&clean, perfect                                             | 62.46 |
+
+## Code Summarization
+| Python          | 100  | 200   | 300   | 500   | 1000  | 1%    |
+|-----------------|------|-------|-------|-------|-------|-------|
+| CodeT5-small    | 5.42 | 7.62  | 7.89  | 11.58 | 13.23 | 14.01 |
+| CodeT5-small+PT | 6.55 | 9.28  | 9.6   | 12.73 | 13.89 | 14.33 |
+| CodeT5-base     | 5.8  | 8.46  | 9.36  | 13.58 | 13.86 | 14.22 |
+| CodeT5-base+PT  | 7.82 | 10.78 | 12.63 | 14.77 | 14.78 | 14.81 |
+|                 |      |       |       |       |       |       |
+|                 |      |       |       |       |       |       |
+| Ruby            | 100  | 200   | 300   | 500   | 1000  | 1%    |
+| CodeT5-small    | 4.82 | 6.75  | 7.22  | 9.46  | 9.85  | 9.99  |
+| CodeT5-small+PT | 6.48 | 7.89  | 8.26  | 10.89 | 10.91 | 10.85 |
+| CodeT5-base     | 4.93 | 6.83  | 7.19  | 10.1  | 11.22 | 10.36 |
+| CodeT5-base+PT  | 6.99 | 8.52  | 9.41  | 10.79 | 11.87 | 10.64 |
+|                 |      |       |       |       |       |       |
+|                 |      |       |       |       |       |       |
+| PHP             | 100  | 200   | 300   | 500   | 1000  | 1%    |
+| CodeT5-small    | 6.41 | 9.5   | 11.89 | 13.21 | 16.71 | 17.25 |
+| CodeT5-small+PT | 7.9  | 12.23 | 14.13 | 16.26 | 17.47 | 17.88 |
+| CodeT5-base     | 5.52 | 8.9   | 12.83 | 15.59 | 17.65 | 20.65 |
+| CodeT5-base+PT  | 9.12 | 13.55 | 14.94 | 17.39 | 18.3  | 21.05 |
+|                 |      |       |       |       |       |       |
+|                 |      |       |       |       |       |       |
+| go              | 100  | 200   | 300   | 500   | 1000  | 1%    |
+| CodeT5-small    | 5.24 | 7.18  | 8.65  | 12.99 | 15.05 | 17.65 |
+| CodeT5-small+PT | 7.2  | 11.51 | 12.42 | 14.32 | 16.88 | 17.95 |
+| CodeT5-base     | 7.96 | 9.64  | 10.88 | 13.62 | 16.93 | 19.99 |
+| CodeT5-base+PT  | 9.07 | 12.15 | 13.66 | 15.04 | 17.74 | 20.54 |
+|                 |      |       |       |       |       |       |
+|                 |      |       |       |       |       |       |
+| java            | 100  | 200   | 300   | 500   | 1000  | 1%    |
+| CodeT5-small    | 2.7  | 3.86  | 5.33  | 6.94  | 7.88  | 10.12 |
+| CodeT5-small+PT | 3.56 | 5.89  | 7.35  | 9.9   | 10.44 | 11.18 |
+| CodeT5-base     | 3.35 | 4.73  | 7.24  | 8.32  | 10.94 | 11.75 |
+| CodeT5-base+PT  | 6.07 | 7.56  | 10.14 | 11.06 | 11.99 | 12.4  |
+|                 |      |       |       |       |       |       |
+|                 |      |       |       |       |       |       |
+|                 |      |       |       |       |       |       |
+| js              | 100  | 200   | 300   | 500   | 1000  | 1%    |
+| CodeT5-small    | 3.56 | 5.48  | 6.97  | 7.73  | 8.36  | 9.81  |
+| CodeT5-small+PT | 5.9  | 7.58  | 8.76  | 9.6   | 10.14 | 11.58 |
+| CodeT5-base     | 4.14 | 5.6   | 7.07  | 10    | 10.62 | 11.53 |
+| CodeT5-base+PT  | 6.5  | 8.37  | 9.61  | 11.27 | 11.81 | 12.17 |
+
+
