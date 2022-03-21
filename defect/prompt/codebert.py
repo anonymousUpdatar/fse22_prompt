@@ -1,5 +1,4 @@
 import json
-from statistics import mode
 import torch
 import torch.nn as nn
 import random
@@ -25,32 +24,34 @@ def read_answers(filename):
             example = InputExample(guid=js['target'], text_a=js['func'])
             answers.append(example)
     return answers
-def set_seed(seed=42):
+def set_seed(seed=52):
     random.seed(seed)
     os.environ['PYHTONHASHSEED'] = str(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
     torch.cuda.manual_seed(seed)
     torch.backends.cudnn.deterministic = True
-train_dataset = read_answers('../dataset/train.jsonl')
-valid_dataset = read_answers('../dataset/valid.jsonl')
-test_dataset = read_answers('../dataset/test.jsonl')
+train_dataset = read_answers('/data/czwang/prompt/dataset/train.jsonl')
+valid_dataset = read_answers('/data/czwang/prompt/dataset/valid.jsonl')
+test_dataset = read_answers('/data/czwang/prompt/dataset/test.jsonl')
 # print(len(dataset), dataset[:5])
 classes = ['negative', 'positive']
 from openprompt.plms import load_plm
 plm, tokenizer, model_config, WrapperClass = load_plm("roberta", "microsoft/codebert-base")
 from openprompt.prompts import ManualTemplate, SoftTemplate, MixedTemplate
-promptTemplate = SoftTemplate(
+promptTemplate = MixedTemplate(
     model = plm,
-    text = '{"placeholder":"text_a"}. {"soft"}{"soft"} {"mask"}.',
+    text = 'The code {"placeholder":"text_a"} is {"mask"}.',
     tokenizer = tokenizer,
 )
 from openprompt.prompts import ManualVerbalizer
 promptVerbalizer = ManualVerbalizer(
     classes = classes,
     label_words = {
-        "negative": ["indefective","good"],
-        "positive": ["defective", "terrible"],
+        "negative": ["clean", "good"],
+        "positive": ["defective", "bad"],
+        # "negative": ["indefective","good"],
+        # "positive": ["defective", "bad"],
     },
     tokenizer = tokenizer,
 )
@@ -146,7 +147,7 @@ def train(model, train_data_loader):
 
     total_loss = 0.0
     sum_loss = 0.0
-    for idx in range(0, max_epochs): 
+    for idx in range(0, max_epochs):
         total_loss = 0.0
         sum_loss = 0.0
         logger.info("******* Epoch %d *****", idx)
@@ -174,6 +175,5 @@ def train(model, train_data_loader):
                 global_step += 1
         logger.info(f"Training epoch {idx}, num_steps {global_step},  total_loss: {total_loss:.4f}")
         test(model, test_data_loader)
-
 train(promptModel, train_data_loader)
-test(promptModel, test_data_loader)
+

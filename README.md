@@ -72,6 +72,26 @@ The runnning command is similar with code summarization for fine-tune and prompt
 | [SOFT]*50 [x] [z]      | bad, defective&clean, perfect                                             | 62.96 |
 | [SOFT]*100 [x] [z]      | bad, defective&clean, perfect                                             | 62.46 |
 
+| CodeT5-small   | ACC   |
+|----------------|-------|
+| Defect [X] [Z] | 63    |
+| prefix 50      | 62.34 |
+| prefix 100     | 62.65 |
+| prefix 150     | 63.52 |
+| prefix 200     | 63.91 |
+| prefix 250        | 63.77 |
+
+| CodeT5-base    | ACC   |
+|----------------|-------|
+| Defect [X] [Z] | 64.98 |
+| prefix 50      | 64.59 |
+| prefix 100     | 64.7  |
+| prefix 150     | 65.66 |
+| prefix 200     | 65.82 |
+| prefix 250        | 65.64 |
+
+
+
 ## Code Summarization
 | Python          | 100  | 200   | 300   | 500   | 1000  | 1%    |
 |-----------------|------|-------|-------|-------|-------|-------|
