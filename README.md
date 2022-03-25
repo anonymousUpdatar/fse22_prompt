@@ -93,6 +93,16 @@ The runnning command is similar with code summarization for fine-tune and prompt
 
 
 ## Code Summarization
+
+|                               | Ruby          | JavaScript     | Go             | Python         | Java           | PHP            | Overall        |
+|-------------------------------|---------------|----------------|----------------|----------------|----------------|----------------|----------------|
+| codet5-small | Fine-tuning   | 13.38          | 14.94          | 21.27          | 17.88          | 18.38          | 24.70          | 18.43          |
+|        Codet5-small                       | Prompt tuning | \textbf{13.60} | \textbf{15.91} | \textbf{22.33} | \textbf{18.34} | \textbf{20.60} | \textbf{26.95} | \textbf{19.62} |
+| codet5-base  | Fine-tuning   | 13.70          | 15.80          | 22.60          | 17.97          | 19.56          | 25.77          | 19.23          |
+|          codet5-base                     | Prompt tuning | \textbf{14.29} | \textbf{16.04} | \textbf{23.11} | \textbf{18.52} | \textbf{19.72} | \textbf{27.06} | \textbf{19.79} |
+
+
+### low resource
 | Python          | 100  | 200   | 300   | 500   | 1000  | 1%    |
 |-----------------|------|-------|-------|-------|-------|-------|
 | CodeT5-small    | 5.42 | 7.62  | 7.89  | 11.58 | 13.23 | 14.01 |
@@ -137,3 +147,14 @@ The runnning command is similar with code summarization for fine-tune and prompt
 | CodeT5-base+PT  | 6.5  | 8.37  | 9.61  | 11.27 | 11.81 | 12.17 |
 
 
+## Code translation
+|              |                | BLEU           | Accuracy       | CodeBLEU       | BLEU           | Accuracy       | CodeBLEU       |
+|--------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|
+|              | Naive copy     | 18.69          | 0              | -              | 18.54          | 0              | -              |
+|              | Transformer    | 50.47          | 37.90          | 61.59          | 55.84          | 33.00          | 63.74          |
+|              | RoBERTa (code) | 71.99          | 57.90          | 80.18          | 77.46          | 56.10          | 83.07          |
+|              | CodeBERT       | 72.14          | 58.00          | 79.41          | 79.92          | 59.00          | 85.10          |
+| CodeT5-small | Fine-tuning    | 78.67          | 65.40          | 82.55          | 82.29          | 63.80          | 87.01          |
+| CodeT5-small | Prompt tuning  | textbf{79.59}   | \textbf{66.00} | \textbf{83.06} | \textbf{83.33} | \textbf{64.30} | \textbf{87.99} |
+| CodeT5-base  | Fine-tuning    | 79.45          | \textbf{66.10} | 83.96          | 83.61          | 65.30          | 88.32          |
+| CodeT5-base  | Prompt tuning  | \textbf{79.76} | \textbf{66.10} | \textbf{84.39} | \textbf{83.99} | \textbf{65.40} | \textbf{88.74} |
