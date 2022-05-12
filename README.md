@@ -1,14 +1,14 @@
 # Update 
 ## BoxPlot
-Due to the space limit, we only show the aggregated metrics in our experiments. Here we present the boxplots comparing prompt tuning and fine-tuning in code summarization tasks among six datasets:
+We show aggregated results since aggregated metrics are objective and widely used to evaluate the effectiveness of the code intelligence model [1,56]. Due to the space limit, we could not give more results in the submitted paper.  Here we present the boxplots comparing prompt tuning and fine-tuning in code summarization tasks among six datasets:
 ![code summarization -- CodeT5-small](figs/sum-codet5.jpg)
 
-We can observe that the prompt tuning has overall better performance. The median, Q1, Q3 of the boxplot of prompt tuning is consistently larger than that of fine-tuning.
+We can observe that the prompt tuning has overall better performance. The median, Q1, Q3 of the boxplot of prompt tuning is consistently larger than that of fine-tuning. For instance, the averaged Q1, the first quartile, of prompt tuning achieves 24.35, which is 7.23% higher than that of fine-tuning. In addition, prompt tuning outperforms fine-tuning by 6.57% in terms of median on average.
 ## Converge Speed
 We compare the speed of prompt tuning and fine-tuning on the Java dataset on code summarization tasks. We evaluate the speed on both full data and data scarcity scenarios:
 ![Convergence](figs/speed.jpg)
 
-Discussion: From the figure, we find that prompt tuning can converge faster in both full data and data scarcity scenarios. For instance, when there are 1,000 training instances, prompt tuning achieves nearly optimal results in Epoch 4, which is five epochs earlier than fine-tuning. Similarly, in full data scenario, in Epoch 2, prompt tuning achieves the almost best performance while fine-tuning achieves that in Epoch 4.
+Discussion: From the figure, we find that prompt tuning can converge faster in both full data and data scarcity scenarios. For instance, when there are 1,000 training instances, prompt tuning achieves nearly optimal results in Epoch 4, which is five epochs earlier than fine-tuning. Similarly, in full data scenario  prompt tuning achieves the  near-best performance in Epoch 2 while fine-tuning achieves that in Epoch 4.
 ## More Cases
 Due to the space limit, we only present a case study in the code translation task. Here we give more cases.
 ### Code Summarization
