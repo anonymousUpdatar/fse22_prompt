@@ -97,9 +97,9 @@ The runnning command is similar with code summarization for fine-tune and prompt
 |                               | Ruby          | JavaScript     | Go             | Python         | Java           | PHP            | Overall        |
 |-------------------------------|---------------|----------------|----------------|----------------|----------------|----------------|----------------|
 | codet5-small | Fine-tuning   | 13.38          | 14.94          | 21.27          | 17.88          | 18.38          | 24.70          | 18.43          |
-|        Codet5-small                       | Prompt tuning | \textbf{13.60} | \textbf{15.91} | \textbf{22.33} | \textbf{18.34} | \textbf{20.60} | \textbf{26.95} | \textbf{19.62} |
+|        Codet5-small                       | Prompt tuning | 13.60 | 15.91 | 22.33 | 18.34 | 20.60 | 26.95 | 19.62 |
 | codet5-base  | Fine-tuning   | 13.70          | 15.80          | 22.60          | 17.97          | 19.56          | 25.77          | 19.23          |
-|          codet5-base                     | Prompt tuning | \textbf{14.29} | \textbf{16.04} | \textbf{23.11} | \textbf{18.52} | \textbf{19.72} | \textbf{27.06} | \textbf{19.79} |
+|          codet5-base                     | Prompt tuning | 14.29 | 16.04 | 23.11 | 18.52 | 19.72 | 27.06 | 19.79 |
 
 
 ### low resource
@@ -155,22 +155,24 @@ The runnning command is similar with code summarization for fine-tune and prompt
 |              | RoBERTa (code) | 71.99          | 57.90          | 80.18          | 77.46          | 56.10          | 83.07          |
 |              | CodeBERT       | 72.14          | 58.00          | 79.41          | 79.92          | 59.00          | 85.10          |
 | CodeT5-small | Fine-tuning    | 78.67          | 65.40          | 82.55          | 82.29          | 63.80          | 87.01          |
-| CodeT5-small | Prompt tuning  | textbf{79.59}   | \textbf{66.00} | \textbf{83.06} | \textbf{83.33} | \textbf{64.30} | \textbf{87.99} |
-| CodeT5-base  | Fine-tuning    | 79.45          | \textbf{66.10} | 83.96          | 83.61          | 65.30          | 88.32          |
-| CodeT5-base  | Prompt tuning  | \textbf{79.76} | \textbf{66.10} | \textbf{84.39} | \textbf{83.99} | \textbf{65.40} | \textbf{88.74} |
+| CodeT5-small | Prompt tuning  | 79.59   | 66.00 | 83.06 | 83.33 | 64.30 | 87.99 |
+| CodeT5-base  | Fine-tuning    | 79.45          | 66.10 | 83.96          | 83.61          | 65.30          | 88.32          |
+| CodeT5-base  | Prompt tuning  | 79.76 | 66.10 | 84.39 | 83.99 | 65.40 | 88.74 |
 
 
 ## BoxPlot
-We present the boxplots comparing prompt tuning and fine-tuning in code summarization tasks among six datasets:
+Due to the space limit, we only show the aggregated metrics in our experiments. Here we present the boxplots comparing prompt tuning and fine-tuning in code summarization tasks among six datasets:
 ![code summarization](figs/codesum.jpg)
 
+We can observe that the prompt tuning has an overall better performance. The median, Q1 and Q3 of boxplot of prompt tuning is larger than that of fine-tuning.
 ## Converge Speed
 We compare the speed of prompt tuning fine-tuning on Java dataset on code summarization tasks. We evalutate the speed on both full data and data scarcity scenarios:
 ![Convergence](figs/speed.jpg)
 
-From the figure we can find that in both full data and data scarcity scenarios, prompt tuning can converge faster.
+Discussion:From the figure we can find that in both full data and data scarcity scenarios, prompt tuning can converge faster.
 ## More Cases
-### Code summarization
+Due to the space limit, we only present a case study in code translation task. Here we give more cases.
+### Code Summarization
 ---
 ```ruby
 Contentful.Client.entry", "original_string": "def entry(id, query = {})
@@ -223,3 +225,35 @@ Turntabler.AuthorizedUser.update_laptop", "original_string": "def update_laptop(
 In this case, prompt tuning successfully capture the semantics in the function updating the laptop instead of misleading by the word "modify".
 
 ---
+
+### Code Translation
+Original C# code
+```cs
+public virtual FilePath GetFile()
+{
+  return file;
+}
+```
+Ground truth Java code
+```java
+public File getFile() 
+{
+  return file;
+}
+```
+Generated Java code by fine-tuning
+```java
+public FilePath getFile() 
+{
+  return file;
+}
+```
+
+Generated Java code by prompt tuning
+```java
+public File getFile() 
+{
+  return file;
+}
+```
+Discussion: prompt tuning can generate more accurate function type "File" for target program language instead of directly copying it from original C# code.
