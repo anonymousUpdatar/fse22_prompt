@@ -162,14 +162,14 @@ The runnning command is similar with code summarization for fine-tune and prompt
 
 ## BoxPlot
 Due to the space limit, we only show the aggregated metrics in our experiments. Here we present the boxplots comparing prompt tuning and fine-tuning in code summarization tasks among six datasets:
-![code summarization](figs/codesum.jpg)
+![code summarization -- CodeT5-small](figs/sum-codet5.jpg)
 
-We can observe that the prompt tuning has an overall better performance. The median, Q1 and Q3 of boxplot of prompt tuning is larger than that of fine-tuning.
+We can observe that the prompt tuning has an overall better performance. The median, Q1 and Q3 of boxplot of prompt tuning is consistently larger than that of fine-tuning.
 ## Converge Speed
 We compare the speed of prompt tuning fine-tuning on Java dataset on code summarization tasks. We evalutate the speed on both full data and data scarcity scenarios:
 ![Convergence](figs/speed.jpg)
 
-Discussion:From the figure we can find that in both full data and data scarcity scenarios, prompt tuning can converge faster.
+Discussion:From the figure we can find that in both full data and data scarcity scenarios, prompt tuning can converge faster. For instance, when there are 1,000 training instances, prompt tuning achieves nearly optimal resuls in Epoch 4 which is 5 epochs earlier than fine-tuning. Similarly, in full data scenario, in Epoch 2 prompt tuning achieves the almost best performance while fine-tuning achieves that in Epoch 4.
 ## More Cases
 Due to the space limit, we only present a case study in code translation task. Here we give more cases.
 ### Code Summarization
